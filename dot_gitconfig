@@ -1,0 +1,41 @@
+[user]
+	name = oblique1121
+	email = oblique1121@hotmail.com
+
+[core]
+	excludesfile = ~/.gitignore_global
+	autoCRLF = input
+	ignorecase = false
+
+[alias]
+	cp = cherry-pick
+	bm = branch -m
+	sc = switch -c
+	nemerge = merge --no-edit
+	graft = rebase --onto
+	fixup = commit --allow-empty-message --no-edit --amend
+	overwrite = !git add --all && git fixup
+	collapse = "!f(){ git reset --soft $1 && git fixup;};f"
+	update = "!f(){ git switch $1 && git fetch -p && git pull;};f"
+	save= "!f(){ git add --all && git commit -m \"${*:-wip}\";};f"
+	zfixup = commit --fixup
+	zoverwrite = !git add --all && git zfixup
+	zzfixup = "!f(){ git zfixup $1 && git rebase $1^;};f"
+	zzoverwrite = "!f(){ git zoverwrite $1 && git rebase $1^;};f"
+	zzzfixup = "!f(){ git zzfixup $1;};GIT_SEQUENCE_EDITOR=: f"
+	zzzoverwrite = "!f(){ git zzoverwrite $1;};GIT_SEQUENCE_EDITOR=: f"
+	messages= "!f(){ git log --format="%s" --reverse $1...@;};f"
+	bsm = !git branch --merged | grep -v '*' | grep -v \"^ *master$\" | grep -v \"^ *main$\" | grep -v \"^ *develop$\"
+	bdm = !git bsm | xargs -I % git branch -d %
+
+[merge]
+	ff = false
+
+[pull]
+	ff = only
+
+[rebase]
+	autosquash = true
+
+[init]
+	defaultBranch = main

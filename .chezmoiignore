@@ -1,0 +1,7 @@
+install.sh
+LICENSE
+README.md
+
+{{- if eq (env "REMOTE_CONTAINERS") "true" }}
+.gitconfig
+{{- end }}

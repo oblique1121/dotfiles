@@ -1,0 +1,4 @@
+.DS_Store
+.temporary/
+.vscode/
+code.code-workspace
