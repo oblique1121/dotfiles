@@ -20,8 +20,8 @@
 	save= "!f(){ git add --all && git commit -m \"${*:-wip}\";};f"
 	zfixup = commit --fixup
 	zoverwrite = !git add --all && git zfixup
-	zzfixup = "!f(){ git zfixup $1 && git rebase $1^;};f"
-	zzoverwrite = "!f(){ git zoverwrite $1 && git rebase $1^;};f"
+	zzfixup = "!f(){ git zfixup $1 && git rebase -i $1^;};f"
+	zzoverwrite = "!f(){ git zoverwrite $1 && git rebase -i $1^;};f"
 	zzzfixup = "!f(){ git zzfixup $1;};GIT_SEQUENCE_EDITOR=: f"
 	zzzoverwrite = "!f(){ git zzoverwrite $1;};GIT_SEQUENCE_EDITOR=: f"
 	messages= "!f(){ git log --format="%s" --reverse $1...@;};f"
