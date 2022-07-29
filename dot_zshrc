@@ -49,6 +49,7 @@ zstyle ':completion:*:default' menu select
 # alias
 alias dlc='(){find $1 -type f | xargs wc -l | sort -r}' # directory line count
 alias open='explorer.exe'
+alias dez='(){docker exec -u node -w /workspace -it $(docker container ls --format "{{ .Names }}" | grep $1) /bin/zsh}' # docker exec zhc
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
