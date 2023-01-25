@@ -47,9 +47,28 @@ PROMPT='%B%F{blue}[%D{%Y/%m/%d %H:%M:%S}]${vcs_info_msg_0_}%F{yellow}%~%F{cyan}$
 zstyle ':completion:*:default' menu select
 
 # alias
-alias dlc='(){find $1 -type f | xargs wc -l | sort -r}' # directory line count
 alias open='explorer.exe'
-alias dez='(){docker exec -u node -w /workspace -it $(docker container ls --format "{{ .Names }}" | grep $1) /bin/zsh}' # docker exec zhc
+
+# function
+# directory line count
+dlc() {
+  find "$1" -type f -print0 | xargs -0 wc -l | sort -r
+}
+
+# docker exec zsh
+dez() {
+  containers=$(docker container ls --format "{{ .Names }}")
+  while [ $# -gt 0 ]; do
+    containers=$(echo "$containers" | grep "$1")
+    shift
+  done
+  if [ "$(echo "$containers" | wc -l)" -ne 1 ]; then
+    echo "$containers"
+    return 1
+  fi
+
+  docker exec -u node -it "$containers" /bin/zsh
+}
 
 # Volta
 export VOLTA_HOME="$HOME/.volta"
