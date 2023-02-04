@@ -49,25 +49,33 @@ zstyle ':completion:*:default' menu select
 # alias
 alias open='explorer.exe'
 
-# function
-# directory line count
+# functions
+## directory line count
 dlc() {
   find "$1" -type f -print0 | xargs -0 wc -l | sort -r
 }
 
-# docker exec zsh
+## docker exec zsh
 dez() {
+  workdir=/
   containers=$(docker container ls --format "{{ .Names }}")
+
   while [ $# -gt 0 ]; do
-    containers=$(echo "$containers" | grep "$1")
+    case $1 in
+    -w=* | --workdir=*) workdir=${1#*=} ;;
+    -w | --workdir) shift && workdir=$1 ;;
+    *) containers=$(echo "$containers" | grep "$1") ;;
+    esac
+
     shift
   done
+
   if [ "$(echo "$containers" | wc -l)" -ne 1 ]; then
     echo "$containers"
     return 1
   fi
 
-  docker exec -u node -it "$containers" /bin/zsh
+  docker exec -u node -w "$workdir" -it "$containers" /bin/zsh
 }
 
 # Volta
