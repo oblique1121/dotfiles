@@ -25,8 +25,8 @@
 	zzoverwrite = "!f(){ git zoverwrite $1 && git rebase -i $1^;}; f"
 	zzzfixup = "!f(){ GIT_SEQUENCE_EDITOR=: git zzfixup $1;}; f"
 	zzzoverwrite = "!f(){ GIT_SEQUENCE_EDITOR=: git zzoverwrite $1;}; f"
-	messages= "!f(){ git log --format=\"%Cgreen%s\" --reverse $1...@;}; f"
-	dmessages= "!f(){ git log --format=\"%Cgreen%s%Creset%n%w(0,2,2)%b%-\" --reverse $1...@;}; f"
+	messages= "!f(){ git --no-pager log --format=\"%Cgreen%s\" --reverse $1...@;}; f"
+	dmessages= "!f(){ git --no-pager log --format=\"%Cgreen%s%Creset%n%w(0,2,2)%b%-\" --reverse $1...@;}; f"
 	bsm = !git branch --merged | grep -v '*' | grep -v \"^ *master$\" | grep -v \"^ *main$\" | grep -v \"^ *develop$\"
 	bdm = !git bsm | xargs -I % git branch -d %
 
