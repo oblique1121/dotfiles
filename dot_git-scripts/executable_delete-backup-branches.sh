@@ -36,7 +36,7 @@ fi
 
 echo "Deleting backup branches for base branch: $base_branch"
 for branch in $backup_branches; do
-  $delete_command "$branch" && echo "Deleted: $branch" || echo "Failed to delete: $branch"
+  $delete_command "$branch"
 done
 
 echo "Cleanup completed."
