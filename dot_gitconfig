@@ -9,6 +9,7 @@
 
 [alias]
 	cp = cherry-pick
+	bb = !~/.git-scripts/backup-branch.sh
 	bm = branch -m
 	sc = switch -c
 	nemerge = merge --no-edit
