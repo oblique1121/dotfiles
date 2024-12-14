@@ -11,6 +11,7 @@
 	cp = cherry-pick
 	bb = !~/.git-scripts/backup-branch.sh
 	dbb = !~/.git-scripts/delete-backup-branches.sh
+	lbb = !~/.git-scripts/list-backup-branches.sh
 	bm = branch -m
 	sc = switch -c
 	nemerge = merge --no-edit
