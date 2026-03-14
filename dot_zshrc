@@ -17,10 +17,11 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
+_git_version=$(git --version 2>/dev/null | awk '{print $3}')
 zinit wait silent lucid atclone"zstyle ':completion:*:*:git:*' script git-completion.bash" atpull"%atclone" for \
-  "https://github.com/git/git/blob/master/contrib/completion/git-completion.bash"
+  "https://raw.githubusercontent.com/git/git/refs/tags/v${_git_version}/contrib/completion/git-completion.bash"
 zinit wait lucid as"completion" atload"zicompinit; zicdreplay" mv"git-completion.zsh -> _git" for \
-  "https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh"
+  "https://raw.githubusercontent.com/git/git/refs/tags/v${_git_version}/contrib/completion/git-completion.zsh"
 
 # History
 HISTFILE=~/.zsh_history
