@@ -1,4 +1,5 @@
 .DS_Store
+.private/
 .temporary/
 .vscode/
 code.code-workspace
