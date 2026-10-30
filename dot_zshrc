@@ -28,7 +28,7 @@ HISTFILE=${HISTFILE:-~/.zsh_history}
 HISTSIZE=10000
 SAVEHIST=10000
 setopt share_history
-setopt append_history
+setopt hist_ignore_all_dups
 setopt extended_history
 
 # setup PROMPT
@@ -48,8 +48,14 @@ PROMPT='%B%F{blue}[%D{%Y/%m/%d %H:%M:%S}]${vcs_info_msg_0_}%F{yellow}%~%F{cyan}$
 zstyle ':completion:*:default' menu select
 
 # alias
-alias open='explorer.exe'
+if [[ "$(uname -r)" == *[Mm]icrosoft* ]]; then
+  alias open='explorer.exe'
+fi
 
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# mise
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
