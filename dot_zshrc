@@ -59,3 +59,8 @@ export PATH="$HOME/.local/bin:$PATH"
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
+
+# devcontainer: load personal rc under PROJECT_ROOT/.private if present
+if [[ -n "${PROJECT_ROOT:-}" && -f "$PROJECT_ROOT/.private/zshrc" ]]; then
+  source "$PROJECT_ROOT/.private/zshrc"
+fi
